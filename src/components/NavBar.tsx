@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <nav className="w-full border-b border-black px-6 py-4 flex justify-between items-center bg-white text-black">
+    <nav className="w-full border-b border-black px-6 py-4 my-6 flex justify-between items-center bg-white text-black">
       <Link href="/" className="text-xl font-bold tracking-tight">
         KNN Tool
       </Link>
