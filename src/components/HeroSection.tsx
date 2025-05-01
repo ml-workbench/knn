@@ -15,6 +15,7 @@ export default function HeroSection() {
         <Button href="/knn" bgcolor="white" textcolor="black">Get Started</Button>
         <Button href="#" bgcolor="black" textcolor="white">Learn More</Button>
       </div>
+      
     </div>
   );
 }

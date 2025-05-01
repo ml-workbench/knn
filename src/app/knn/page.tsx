@@ -1,7 +1,9 @@
 import CSVUpload from "@/components/CsvUpload";
+import KnnConfiguration from "@/components/KnnConfiguration";
 
 export default function knn() {
   return (
+    <>
     <div className="text-center py-24 border border-black bg-white text-black">
       <div className="max-w-2xl mx-auto text-center mb-8">
         <h2 className="text-3xl font-bold mb-2">KNN Regression Tool</h2>
@@ -14,6 +16,9 @@ export default function knn() {
 
 
       <CSVUpload />
+
     </div>
+    <KnnConfiguration/>
+    </>
   );
 }
