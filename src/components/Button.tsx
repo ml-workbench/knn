@@ -1,9 +1,9 @@
 import Link from "next/link";
 interface ButtonProps{
     href:string;
-    bgcolor:string;
-    textcolor:string;
-    children:React.ReactNode
+    bgcolor?:string;
+    textcolor?:string;
+    children?:React.ReactNode
 }
 
 export default function Button ({href,bgcolor,textcolor,children} : ButtonProps){
