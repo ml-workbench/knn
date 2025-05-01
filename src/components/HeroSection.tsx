@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 export default function HeroSection() {
   return (
     <div className="text-center py-24 border border-black bg-white text-black">
@@ -10,18 +12,8 @@ export default function HeroSection() {
         parameters, and get predictions instantly.
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <a
-          href="#"
-          className="px-6 py-3 border-2 border-black bg-black text-white hover:bg-white hover:text-black transition-colors duration-200"
-        >
-          Get Started
-        </a>
-        <a
-          href="#"
-          className="px-6 py-3 border-2 border-black text-black hover:bg-black hover:text-white transition-colors duration-200"
-        >
-          Learn More
-        </a>
+        <Button href="/knn" bgcolor="white" textcolor="black">Get Started</Button>
+        <Button href="#" bgcolor="black" textcolor="white">Learn More</Button>
       </div>
     </div>
   );
