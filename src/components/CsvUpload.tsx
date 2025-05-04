@@ -16,14 +16,25 @@ export default function CSVUpload(){
             const lines = text.split("\n");
             console.log("Lines = ",lines);
 
-            const header = lines[0].split(",").map(h => h.trim());
+            const header = lines[0].split(",").map(h => h.trim()); //array of [column header items] : string
             console.log("Column = ",header);
             
-            const rows = lines.slice(1.200)
+            const rows = lines.slice(1,) // array of [rows] : string
             console.log("Rows = ",rows);
             
-            
+            var TwoDarrayExceptLastItem = rows.map(row => row.split(",").map(Number)); //changed string to number   
+            console.log("2D Array :",TwoDarrayExceptLastItem); 
+            // var euclideanDistance = rows.map(row => 
+            // {
+            //     const values = row.split(",").map(Number)
+
+            //     return Math.sqrt(
+            //         values.reduce((sum,item,i) => sum + (item - inputValue[i])**2 , 0)
+            //     )
+                
+            // }
         }
+        
         
         reader.readAsText(file);
     }

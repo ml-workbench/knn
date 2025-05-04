@@ -13,11 +13,9 @@ export default function knn() {
           only.
         </p>
       </div>
-
-
       <CSVUpload />
-
     </div>
+    
     <KnnConfiguration taskType=""/>
     </>
   );
