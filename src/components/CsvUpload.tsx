@@ -1,49 +1,33 @@
 "use client";
+import extract_features from "@/lib/extract_features";
+import parseCsv from "@/lib/parseCsv";
 import { read } from "fs";
+import { useState } from "react";
 
-export default function CSVUpload(){    
+export default function CSVUpload() {
+    // const [csvData , setCsvData] = useState<{header:string[] , rowValues:Number[][]}>();
 
-    const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
+  const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
 
-        if(!file) return;
+    if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = () =>{
-            const text = reader.result as string;
-            console.log("CSV Content :\n" , text);
-            
-            const lines = text.split("\n");
-            console.log("Lines = ",lines);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const text = reader.result as string;
+      const parsedData = parseCsv(text);
+      const input_features = extract_features(parsedData.rowValues);
+      const 
 
-            const header = lines[0].split(",").map(h => h.trim()); //array of [column header items] : string
-            console.log("Column = ",header);
-            
-            const rows = lines.slice(1,) // array of [rows] : string
-            console.log("Rows = ",rows);
-            
-            var TwoDarrayExceptLastItem = rows.map(row => row.split(",").map(Number)); //changed string to number   
-            console.log("2D Array :",TwoDarrayExceptLastItem); 
-            // var euclideanDistance = rows.map(row => 
-            // {
-            //     const values = row.split(",").map(Number)
+    };
 
-            //     return Math.sqrt(
-            //         values.reduce((sum,item,i) => sum + (item - inputValue[i])**2 , 0)
-            //     )
-                
-            // }
-        }
-        
-        
-        reader.readAsText(file);
-    }
+    reader.readAsText(file);
+  };
 
-    
-    return(
-        <div className="border p-4 rounded max-w-md mx-auto">
-            <label className="block mb-2 font-semibold">Upload CSV File</label>
-            <input type="file" accept=".csv" onChange={handleCsvUpload}/>
-        </div>
-    );
+  return (
+    <div className="border p-4 rounded max-w-md mx-auto">
+      <label className="block mb-2 font-semibold">Upload CSV File</label>
+      <input type="file" accept=".csv" onChange={handleCsvUpload} />
+    </div>
+  );
 }
