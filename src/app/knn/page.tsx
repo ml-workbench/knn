@@ -1,7 +1,10 @@
+"use client";
 import CSVUpload from "@/components/CsvUpload";
 import KnnConfiguration from "@/components/KnnConfiguration";
+import { useState } from "react";
 
-export default function knn() {
+export default function Knn() {
+  const [header , setHeader ] = useState<string[]>([]);
   return (
     <>
     <div className="text-center py-24 border border-black bg-white text-black">
@@ -13,10 +16,12 @@ export default function knn() {
           only.
         </p>
       </div>
-      <CSVUpload />
+      <CSVUpload setHeaders={setHeader}/>
     </div>
+    {header.length > 0 && (
+      <KnnConfiguration taskType={"regression"}headers={header}/>
+    )}
     
-    <KnnConfiguration taskType=""/>
     </>
   );
 }
