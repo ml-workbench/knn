@@ -1,5 +1,4 @@
 export default function runKnnAlgorithm(kValue : number , inputVector : number[],trainingData:number[][]){
-    console.log("Euclidean called ",inputVector,"\n\n\n\n\n",trainingData)
 
     //step 1: calculate ED
     const calculateEuclideanDistance = (row : number[] , inputVector: number[]): number =>{
@@ -7,7 +6,6 @@ export default function runKnnAlgorithm(kValue : number , inputVector : number[]
         for(let i=0; i<row.length-1; i++){
             sum += Math.pow(row[i] - inputVector[i],2)
         }
-        console.log(sum)
         return Math.sqrt(sum)
     }
 
@@ -18,13 +16,13 @@ export default function runKnnAlgorithm(kValue : number , inputVector : number[]
             distance : calculateEuclideanDistance(row,inputVector)
         }
     })
-
-    //step 3: find the k closet rows
-    const label = distances.map(
-        (rowData) => {
-            rowData.distance
-        }
-    )
-
+    
+    distances.sort((a,b) => a.distance - b.distance);
+    
+    const kNearest = distances.slice(0,kValue);
+    
+    const targetValue = kNearest.reduce((sum,item) => sum + item.row[item.row.length -1], 0) / kNearest.length;
+    // console.log(targetValue)
+    return targetValue
     
 }

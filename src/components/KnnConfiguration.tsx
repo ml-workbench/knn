@@ -21,9 +21,9 @@ export default function KnnConfiguration({ taskType, Headers,kValue,trainingData
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const inputVector = formData.map(Number); //input number to test
-    console.log(inputVector)
-    console.log(kValue)
-    console.log(trainingData)
+    // console.log(inputVector)
+    // console.log(kValue)
+    // console.log(trainingData)
     const predicted = runKnnAlgorithm(kValue,inputVector,trainingData)
     console.log(predicted)
   };
