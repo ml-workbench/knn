@@ -4,7 +4,11 @@ import KnnConfiguration from "@/components/KnnConfiguration";
 import { useState } from "react";
 
 export default function Knn() {
-  const [header , setHeader ] = useState<string[]>([]);
+  const [Header , setHeader ] = useState<string[]>([]);
+  const [Rows, setRows] = useState<number [][]>([]);
+    const [kValue, setKValue] = useState(7); // default value
+  
+
   return (
     <>
     <div className="text-center py-24 border border-black bg-white text-black">
@@ -16,10 +20,10 @@ export default function Knn() {
           only.
         </p>
       </div>
-      <CSVUpload setHeaders={setHeader}/>
+      <CSVUpload setHeaders={setHeader} setRows={setRows}/>
     </div>
-    {header.length > 0 && (
-      <KnnConfiguration taskType={"regression"}headers={header}/>
+    {Header.length > 0 && (
+      <KnnConfiguration taskType={"regression"}Headers={Header} kValue={kValue} trainingData={Rows}/>
     )}
     
     </>
