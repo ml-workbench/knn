@@ -23,7 +23,7 @@ export default function Knn() {
       <CSVUpload setHeaders={setHeader} setRows={setRows}/>
     </div>
     {Header.length > 0 && (
-      <KnnConfiguration taskType={"regression"}Headers={Header} kValue={kValue} trainingData={Rows}/>
+      <KnnConfiguration taskType={"regression"}Headers={Header} kValue={kValue} setKValue={setKValue} trainingData={Rows}/>
     )}
     
     </>

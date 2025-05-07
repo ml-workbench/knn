@@ -6,9 +6,10 @@ interface TaskProps {
   taskType: string;
   Headers: string[];
   kValue: number;
+  setKValue: (value: number) => void;
   trainingData:number[][];
 }
-export default function KnnConfiguration({ taskType, Headers,kValue,trainingData}: TaskProps) {
+export default function KnnConfiguration({ taskType, Headers,kValue,setKValue,trainingData}: TaskProps) {
   const [formData, setFormData] = useState<string[]>([]);
   const [predicted ,setPredicted] = useState<number>(null);
   const trimmedHeaders = Headers.slice(0,-1);
@@ -93,7 +94,7 @@ export default function KnnConfiguration({ taskType, Headers,kValue,trainingData
             min="1"
             max="20"
             value={kValue}
-            // onChange={(e) => setKValue(Number(e.target.value))}
+            onChange={(e) => setKValue(Number(e.target.value))}
             className="w-[40rem] accent-black mx-2"
           />
         </div>
@@ -123,7 +124,7 @@ export default function KnnConfiguration({ taskType, Headers,kValue,trainingData
                 <label className="w-28 text-gray-700">{header}:</label>
                 <input
                   type="number"
-                  // value={formData[index][0]}
+                  value={formData[index] || ""}  // ← controlled input
                   onChange={(e) => handleChange(index, e.target.value)}
                   className="flex-1 px-2 py-1 border border-gray-300 rounded"
                   required
