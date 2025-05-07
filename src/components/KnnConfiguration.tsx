@@ -1,29 +1,31 @@
 "use client";
-import Button from "./Button";
 import React, { useEffect, useState } from "react";
+import runKnnAlgorithm from "@/lib/runKnnAlgorithm";
 
 interface TaskProps {
   taskType: string;
-  headers: string[];
+  Headers: string[];
+  kValue: number;
+  trainingData:number[][];
 }
-export default function KnnConfiguration({ taskType, headers }: TaskProps) {
-  const [kValue, setKValue] = useState(7); // default value
+export default function KnnConfiguration({ taskType, Headers,kValue,trainingData}: TaskProps) {
   const [formData, setFormData] = useState<string[]>([]);
-
-  useEffect(() => {
-    setFormData(headers.map(() => "")); //initialize empty formData string array on load of the component
-  }, [headers]);
-
-  const handleChange = (index: number, value: string) => {
+  const trimmedHeaders = Headers.slice(0,-1);
+  
+  const handleChange = (Idx:number, value: string) => {
     const updated = [...formData];
-    updated[index] = value;
+    updated[Idx] = value;
+    console.log(updated)
     setFormData(updated);
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const numericInput = formData.map(Number);
-    console.log(numericInput);
-    console.log("K value:", kValue);
+    const inputVector = formData.map(Number); //input number to test
+    console.log(inputVector)
+    console.log(kValue)
+    console.log(trainingData)
+    const predicted = runKnnAlgorithm(kValue,inputVector,trainingData)
+    console.log(predicted)
   };
   return (
     <div className="my-2 py-2 border border-black bg-white text-black shadow-none">
@@ -90,7 +92,7 @@ export default function KnnConfiguration({ taskType, headers }: TaskProps) {
             min="1"
             max="20"
             value={kValue}
-            onChange={(e) => setKValue(Number(e.target.value))}
+            // onChange={(e) => setKValue(Number(e.target.value))}
             className="w-[40rem] accent-black mx-2"
           />
         </div>
@@ -101,12 +103,12 @@ export default function KnnConfiguration({ taskType, headers }: TaskProps) {
           <h2 className="text-lg font-semibold mb-4">Enter Test Input</h2>
 
           <div className="space-y-3">
-            {headers.map((header, index) => (
+            {trimmedHeaders.map((header, index) => (
               <div key={index} className="flex items-center gap-2">
                 <label className="w-28 text-gray-700">{header}:</label>
                 <input
                   type="number"
-                  value={formData[index]}
+                  // value={formData[index][0]}
                   onChange={(e) => handleChange(index, e.target.value)}
                   className="flex-1 px-2 py-1 border border-gray-300 rounded"
                   required

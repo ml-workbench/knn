@@ -1,15 +1,11 @@
 "use client";
-import extract_features from "@/lib/extract_features";
 import parseCsv from "@/lib/parseCsv";
-import { useState } from "react";
 
 interface setHeaderProps{
   setHeaders : (h: string []) => void
+  setRows : (h: number [][]) => void
 }
-export default function CSVUpload({setHeaders} : setHeaderProps) {
-    // const [csvData , setCsvData] = useState<{header:string[] , rowValues:Number[][]}>();
-    const [extractedData , setExtractedData] = useState<number[][] | null >(null);
-
+export default function CSVUpload({setHeaders,setRows} : setHeaderProps) {
   const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -17,13 +13,12 @@ export default function CSVUpload({setHeaders} : setHeaderProps) {
 
     const reader = new FileReader();
     reader.onload = () => {
-      const text = reader.result as string;
-      const parsedData = parseCsv(text);
-      const trimmedHeader = parsedData.header.slice(0,-1);
-      console.log(trimmedHeader)
-      const input_features = extract_features(parsedData.rowValues);
-      setExtractedData(input_features);
-      setHeaders(trimmedHeader);
+      const text = reader.result as string; //simple text string 
+      const unCutParsedData = parseCsv(text); //rows parsed into numbers     //header1 , header 2 , header3 , header4
+      console.log(unCutParsedData)
+
+      setHeaders(unCutParsedData.unCutHeader)
+      setRows(unCutParsedData.unCutRowValues)
     };
     reader.readAsText(file);
   };
