@@ -22,7 +22,6 @@ export default function runKnnAlgorithm(kValue : number , inputVector : number[]
     const kNearest = distances.slice(0,kValue);
     
     const targetValue = kNearest.reduce((sum,item) => sum + item.row[item.row.length -1], 0) / kNearest.length;
-    // console.log(targetValue)
     return targetValue
     
 }

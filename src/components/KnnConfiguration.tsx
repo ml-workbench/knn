@@ -10,6 +10,7 @@ interface TaskProps {
 }
 export default function KnnConfiguration({ taskType, Headers,kValue,trainingData}: TaskProps) {
   const [formData, setFormData] = useState<string[]>([]);
+  const [predicted ,setPredicted] = useState<number>(null);
   const trimmedHeaders = Headers.slice(0,-1);
   
   const handleChange = (Idx:number, value: string) => {
@@ -25,7 +26,7 @@ export default function KnnConfiguration({ taskType, Headers,kValue,trainingData
     // console.log(kValue)
     // console.log(trainingData)
     const predicted = runKnnAlgorithm(kValue,inputVector,trainingData)
-    console.log(predicted)
+    setPredicted(predicted);
   };
   return (
     <div className="my-2 py-2 border border-black bg-white text-black shadow-none">
@@ -96,6 +97,20 @@ export default function KnnConfiguration({ taskType, Headers,kValue,trainingData
             className="w-[40rem] accent-black mx-2"
           />
         </div>
+        {/* 📊 Show Predicted Value */}
+        {predicted !== null && (
+          <div className="mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative max-w-md">
+            <strong className="font-bold">✅ Prediction Result:</strong>
+            <span className="block sm:inline ml-2">
+              Based on your input, the predicted value is{" "} 
+              <span className="font-semibold text-green-900">
+                {predicted.toFixed(2)}
+              </span>
+              {Headers[Headers.length- 1]}
+              .
+            </span>
+          </div>
+        )}
         <form
           onSubmit={handleSubmit}
           className="border border-gray-300 p-4 rounded-md max-w-md ml-0 mt-4"
